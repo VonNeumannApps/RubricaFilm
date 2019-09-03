@@ -120,11 +120,12 @@ public class MainActivity extends AppCompatActivity {
         ListView moviesLV = findViewById(R.id.moviesListView);
 
         moviesLV.setAdapter(baseAdapter);
+
         moviesLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                ContentValues movie = (ContentValues)baseAdapter.getItem(i);
+                ContentValues movie = movies.get(i);//(ContentValues)baseAdapter.getItem(i);
                 openMovieDetailActivity(movie);
             }
         });
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                openMovieDetailActivity(null);
 
             }
         });
