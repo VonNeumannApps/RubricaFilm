@@ -1,10 +1,14 @@
 package com.example.rubricafilm;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 public class DBManager extends SQLiteOpenHelper {
 
@@ -25,6 +29,24 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+
+    public ArrayList<ContentValues> getMovies() {
+
+        ArrayList<ContentValues> movies = new ArrayList<>();
+
+        try(SQLiteDatabase db = getReadableDatabase()) {
+
+            String query = "SELECT * FROM films";
+
+            Cursor cursor = db.rawQuery(query, null);
+        }
+
+
+
+
+        return null;
 
     }
 }
