@@ -41,12 +41,35 @@ public class DBManager extends SQLiteOpenHelper {
             String query = "SELECT * FROM films";
 
             Cursor cursor = db.rawQuery(query, null);
+
+            cursor.moveToFirst();
+
+            while(!cursor.isAfterLast()) {
+
+                ContentValues movie = new ContentValues();
+
+                movie.put("id", cursor.getInt(cursor.getColumnIndex("id")));
+                movie.put("nome", cursor.getString(cursor.getColumnIndex("nome")));
+                movie.put("genere", cursor.getString(cursor.getColumnIndex("genere")));
+                movie.put("anno_prod", cursor.getString(cursor.getColumnIndex("anno_prod")));
+                movie.put("tipo_supp", cursor.getString(cursor.getColumnIndex("tipo_supp")));
+                movie.put("locandina", cursor.getString(cursor.getColumnIndex("locandina")));
+
+                movies.add(movie);
+
+                cursor.moveToNext();
+            }
         }
 
+        return movies;
 
+    }
 
+    void insertMovie(ContentValues movie) {
 
-        return null;
+        try(SQLiteDatabase db = getWritableDatabase()) {
 
+            db.insert("films", null, movie);
+        }
     }
 }
