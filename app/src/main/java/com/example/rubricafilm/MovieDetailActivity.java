@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -46,6 +47,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         setResult(RESULT_OK);
 
+        Toast.makeText(this, "Salvataggio effettuato", Toast.LENGTH_SHORT).show();
+
         finish();
     }
 
@@ -54,12 +57,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        movie = getIntent().getParcelableExtra("movie");
+
         dbManager = new DBManager(this, DBManager.DATABASE_NAME, null, DBManager.DATABASE_VERSION);
 
         nameET = findViewById(R.id.nameEditText);
         typeET = findViewById(R.id.typeEditText);
         yearET = findViewById(R.id.yearEditText);
         supportTypeET = findViewById(R.id.supportTypeEditText);
+
+        loadData();
 
         Button saveBtn = findViewById(R.id.saveButton);
 
@@ -70,5 +77,15 @@ public class MovieDetailActivity extends AppCompatActivity {
                 saveMovie();
             }
         });
+    }
+
+    void loadData() {
+
+        if(movie != null) {
+            nameET.setText(movie.getAsString("nome"));
+            typeET.setText(movie.getAsString("genere"));
+            yearET.setText(movie.getAsString("anno_prod"));
+            supportTypeET.setText(movie.getAsString("tipo_supp"));
+        }
     }
 }
