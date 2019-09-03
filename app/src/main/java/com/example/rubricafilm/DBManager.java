@@ -2,6 +2,7 @@ package com.example.rubricafilm;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -72,4 +73,5 @@ public class DBManager extends SQLiteOpenHelper {
             db.insert("films", null, movie);
         }
     }
+
 }

@@ -9,45 +9,39 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#FFFFFF"
-            android:text="Elenco Film"
-            >
-
-        </TextView>
+            android:text="Elenco Film"/>
 
         <ImageView
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            >
-
-        </ImageView>
+            android:layout_gravity="end|center_vertical"
+            android:src="@android:drawable/ic_input_add"/>
 
     </FrameLayout>
 
     <ListView
-        android:id="@+id/ListViewDaRinominare"
+        android:id="@+id/moviesListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
     </ListView>
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:padding="10dp"
-        >
-
+        android:padding="10dp">
 
     </FrameLayout>
 

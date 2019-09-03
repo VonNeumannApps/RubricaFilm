@@ -54,7 +54,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Button saveBtn = findViewById(R.id.saveButton);
 
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

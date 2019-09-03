@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:padding="10dp"
-        >
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/titleTextView"
@@ -33,65 +32,62 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_red_dark"
-                android:layout_marginTop="10dp"
-                android:text="Nome"></TextView>
+                android:text="Nome"/>
 
             <EditText
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:layout_marginTop="10dp"
-                android:text="Anno produzione"></TextView>
-
-            <EditText
-                android:id="@+id/yearEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
-
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_red_dark"
                 android:layout_marginTop="10dp"
-                android:text="Genere"></TextView>
+                android:text="Genere"/>
 
             <EditText
                 android:id="@+id/typeEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/holo_red_dark"
                 android:layout_marginTop="10dp"
-                android:text="Tipo di supporto"></TextView>
+                android:text="Anno di produzione"/>
+
+            <EditText
+                android:id="@+id/yearEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginTop="10dp"
+                android:text="Tipo di supporto"/>
 
             <EditText
                 android:id="@+id/supportTypeEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></EditText>
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"></Button>
+                android:layout_marginTop="10dp"
+                android:text="Salva"/>
 
         </LinearLayout>
 

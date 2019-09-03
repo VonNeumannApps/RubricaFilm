@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ContentValues> movies = new ArrayList<>();
     BaseAdapter baseAdapter;
 
-    static final int ADD_EDIT_CODE = 999;
+    static final int ADD_EDIT_CODE = 100;
 
 
     void initializeAdapter() {
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
     void loadMovies() {
 
+        movies.clear();
+
         movies.addAll(dbManager.getMovies());
 
         baseAdapter.notifyDataSetChanged();
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     void openMovieDetailActivity(ContentValues movie) {
 
-        Intent intent = new Intent(MainActivity.this, MovieDetailActivity);
+        Intent intent = new Intent(MainActivity.this, MovieDetailActivity.class);
 
         intent.putExtra("movie", movie);
 
@@ -117,12 +120,22 @@ public class MainActivity extends AppCompatActivity {
         ListView moviesLV = findViewById(R.id.moviesListView);
 
         moviesLV.setAdapter(baseAdapter);
+        moviesLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                ContentValues movie = (ContentValues)baseAdapter.getItem(i);
+                openMovieDetailActivity(movie);
+            }
+        });
+
 
         ImageView addBtn = findViewById(R.id.addButton);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
 
             }
