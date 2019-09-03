@@ -82,4 +82,13 @@ public class DBManager extends SQLiteOpenHelper {
             }
     }
 
+    void deleteMovie(ContentValues movie) {
+
+        try(SQLiteDatabase db = getWritableDatabase()) {
+
+            db.delete("films", "id = ?", new String[] {movie.getAsInteger("id").toString()});
+        }
+
+    }
+
 }

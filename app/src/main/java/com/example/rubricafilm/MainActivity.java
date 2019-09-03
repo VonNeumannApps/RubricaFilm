@@ -1,9 +1,11 @@
 package com.example.rubricafilm;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -88,6 +91,29 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, ADD_EDIT_CODE);
     }
 
+    void openDeletionConfirmationDialog(final ContentValues movie) {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Attenzione");
+        alert.setMessage("Sei sicuro di volere eliminare l'elemento selezionato?");
+
+        alert.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dbManager.deleteMovie(movie);
+
+                Toast.makeText(MainActivity.this, "Elemento eliminato", Toast.LENGTH_SHORT).show();
+
+                loadMovies();
+            }
+        });
+
+        alert.setNegativeButton("NO", null);
+
+        alert.show();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
