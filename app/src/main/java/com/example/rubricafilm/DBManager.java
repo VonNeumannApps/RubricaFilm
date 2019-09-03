@@ -91,4 +91,11 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
+    void deleteAllMovies() {
+
+        try(SQLiteDatabase db = getWritableDatabase()) {
+
+            db.delete("films", "", null);
+        }
+    }
 }

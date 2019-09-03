@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -177,7 +178,39 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Button deleteBtn = findViewById(R.id.deleteButton);
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDeleteAllConfirmationDialog();
+            }
+        });
     }
 
 
+    void openDeleteAllConfirmationDialog() {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Attenzione");
+        alert.setMessage("Sei sicuro di volere eliminare tutti gli elementi?");
+
+        alert.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                dbManager.deleteAllMovies();
+
+                Toast.makeText(MainActivity.this, "Elementi eliminati", Toast.LENGTH_SHORT).show();
+
+                loadMovies();
+            }
+        });
+
+        alert.setNegativeButton("NO", null);
+
+        alert.show();
+    }
 }
