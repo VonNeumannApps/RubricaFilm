@@ -156,6 +156,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        moviesLV.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                ContentValues movie = movies.get(i);
+                openDeletionConfirmationDialog(movie);
+
+                return true;
+            }
+        });
 
         ImageView addBtn = findViewById(R.id.addButton);
 
