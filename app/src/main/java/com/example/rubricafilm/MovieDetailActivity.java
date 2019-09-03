@@ -23,6 +23,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     void saveMovie() {
 
+        boolean isEditMode = movie != null;
+
         if (movie == null) {
 
             movie = new ContentValues();
@@ -33,7 +35,14 @@ public class MovieDetailActivity extends AppCompatActivity {
         movie.put("anno_prod", yearET.getText().toString());
         movie.put("tipo_supp", supportTypeET.getText().toString());
 
-        dbManager.insertMovie(movie);
+        if(isEditMode) {
+
+            dbManager.updateMovie(movie);
+        }
+        else {
+
+            dbManager.insertMovie(movie);
+        }
 
         setResult(RESULT_OK);
 

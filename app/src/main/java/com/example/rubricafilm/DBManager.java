@@ -74,4 +74,12 @@ public class DBManager extends SQLiteOpenHelper {
         }
     }
 
+    void updateMovie(ContentValues movie) {
+
+            try(SQLiteDatabase db = getWritableDatabase()) {
+
+                db.update("films", movie, "id = ?", new String[] {movie.getAsInteger("id").toString()});
+            }
+    }
+
 }
