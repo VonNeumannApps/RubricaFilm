@@ -1,14 +1,133 @@
 package com.example.rubricafilm;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    DBManager dbManager;
+    ArrayList<ContentValues> movies = new ArrayList<>();
+    BaseAdapter baseAdapter;
+
+    static final int ADD_EDIT_CODE = 999;
+
+
+    void initializeAdapter() {
+
+        baseAdapter = new BaseAdapter() {
+            @Override
+            public int getCount() {
+
+                return movies.size();
+            }
+
+            @Override
+            public ContentValues getItem(int i) {
+
+                return movies.get(i);
+            }
+
+            @Override
+            public long getItemId(int i) {
+
+                return i;
+            }
+
+            @Override
+            public View getView(int i, View view, ViewGroup viewGroup) {
+
+                if (view == null) {
+
+                    LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+                    view = layoutInflater.inflate(R.layout.movie_item_layout, viewGroup, false);
+                }
+
+                ContentValues movie = getItem(i);
+
+                TextView movieTitleTV = view.findViewById(R.id.movieTitleTextView);
+                TextView descTV = view.findViewById(R.id.descTextView);
+
+                movieTitleTV.setText(movie.getAsString("nome"));
+                descTV.setText(movie.getAsString("genere") + " - " + movie.getAsString("anno_prod"));
+
+                return view;
+            }
+        };
+    }
+
+    void loadMovies() {
+
+        movies.addAll(dbManager.getMovies());
+
+        baseAdapter.notifyDataSetChanged();
+    }
+
+    void openMovieDetailActivity(ContentValues movie) {
+
+        Intent intent = new Intent(MainActivity.this, MovieDetailActivity);
+
+        intent.putExtra("movie", movie);
+
+        startActivityForResult(intent, ADD_EDIT_CODE);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (requestCode == ADD_EDIT_CODE) {
+
+            if (resultCode == RESULT_OK) {
+
+                loadMovies();
+            }
+        }
+        else {
+
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbManager = new DBManager(this, DBManager.DATABASE_NAME, null, DBManager.DATABASE_VERSION);
+
+        initializeAdapter();
+        loadMovies();
+
+        ListView moviesLV = findViewById(R.id.moviesListView);
+
+        moviesLV.setAdapter(baseAdapter);
+
+        ImageView addBtn = findViewById(R.id.addButton);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
     }
+
+
 }
